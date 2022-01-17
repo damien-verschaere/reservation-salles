@@ -107,14 +107,6 @@ function modifier_profil($login,$password){
             var_dump($user);
             if (isset($user)) {
                 $_SESSION['user'] = $user;
-                // $this-> id = $user['id'];
-                // $this-> login = $user['login'];
-                // $this-> password = $user['password'];
-                // $_SESSION['user'] = [
-                //     'id'=>$this-> id,
-                //     'login'=>$this-> login,
-                //     'password'=>$this-> password,
-                // ];
                 var_dump( $_SESSION ['user'][0]['login'] );
                 echo "update ok2";
             }

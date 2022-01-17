@@ -3,7 +3,7 @@
     require "views/requires/header.php";
     require_once "class/Utilisateurs.php";
     $user=new Utilisateur;
-   var_dump($_SESSION['user']['login'])
+   var_dump($_SESSION['user'])
 
  
 ?>
