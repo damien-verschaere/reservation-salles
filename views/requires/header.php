@@ -14,7 +14,7 @@
         <ul>
           <a href="views/inscription.php"><li>Inscription</li></a>
           <a href="views/connexion.php"><li>Connexion</li></a>
-          <a href="views/planning.php"><li>Reservation</li></a>
+          <a href="views/reservation-form.php"><li>Reservation</li></a>
          <a href="views/profil.php"><li>profil</li></a> 
       </ul>
     </header>

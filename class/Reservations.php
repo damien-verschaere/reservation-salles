@@ -13,13 +13,61 @@ class Reservation{
 public function __construct(){
     $this->_id;
     $this->_titre;
-    $this->_description;
+    $this->_descritpion;
     $this->_debut;
     $this->_fin;
-    $this->_id_utilisateur;   
+    $this->_id_utilisateur;  
+     
+}
+public function connexion(){
+    $con='root';
+    $pass='';
+    try {
+        $bdd = new PDO('mysql:host=localhost;dbname=reservationsalles',$con , $pass);
+        return $bdd;
+    }
+    catch (PDOException $e ) {
+        print "Erreur ! : " . $e-> getMessage()."<br>";
+    die();
+    }
+}
+public function reservation($titre,$description,$debut,$fin,$id){
+
+        if (isset($_POST['reservation'])) {
+            if (empty($titre) || empty($description)|| empty($debut)||empty($fin)) {
+                echo "veuillez remplir tous les champs !!";
+            }
+            else {
+                $title=htmlspecialchars(trim($titre));
+                $describe=htmlspecialchars(trim($description));
+                $id=$_SESSION['user']['id'];
+                $currenttime = $_POST['date'];
+                $newtime = strtotime($currenttime . "+1hours");
+                $fin = date('Y-m-d H:i', $newtime) ;
+                $query_reservation=$this->connexion()->prepare('INSERT INTO reservations (titre,description,debut,fin,id_utilisateur) VALUES (?,?,?,?,?)');
+                $query_reservation->bindParam(1,$title,PDO::PARAM_STR);
+                $query_reservation->bindParam(2,$describe,PDO::PARAM_STR);
+                $query_reservation->bindParam(3,$debut,PDO::PARAM_STR);
+                $query_reservation->bindParam(4,$fin,PDO::PARAM_STR);
+                $query_reservation->bindParam(5,$id,PDO::PARAM_INT);
+                
+                $query_reservation->execute();
+            }
+        }
 }
 
+public function affichage_resa(){
 
+    $affichage=$this->connexion()->prepare('SELECT * FROM reservations ');
+    $affichage->execute();
+    foreach ($affichage as $key ) {
+     echo $key['titre'] ."<br>";
+     echo $key['description']."<br>";
+     echo $key['debut']."<br>";
+     echo $key['fin']."<br>";
+
+    }
+}
 
 }
 

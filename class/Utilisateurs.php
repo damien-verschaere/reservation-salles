@@ -106,8 +106,8 @@ function modifier_profil($login,$password){
             $user=$newlog->fetchAll(PDO::FETCH_ASSOC);
             var_dump($user);
             if (isset($user)) {
-                $_SESSION['user'] = $user;
-                var_dump( $_SESSION ['user'][0]['login'] );
+                $_SESSION=$user;
+                var_dump( $_SESSION ['user'['login']]);
                 echo "update ok2";
             }
         
