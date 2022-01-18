@@ -61,10 +61,12 @@ public function affichage_resa(){
     $affichage=$this->connexion()->prepare('SELECT * FROM reservations ');
     $affichage->execute();
     foreach ($affichage as $key ) {
-     echo $key['titre'] ."<br>";
-     echo $key['description']."<br>";
-     echo $key['debut']."<br>";
+     echo "jour de la semaine " .date('w',strtotime($key['debut']))."<br>";
      echo $key['fin']."<br>";
+     echo "nous somme le jour ".date('d/m/y \à\ H:m:s ',strtotime($key['debut']));
+    $jour_semaine=array(0=>'dimanche',1=>'lundi',2=>'mardi',3=>'mercredi',4=>'jeudi',6=>'vendredi',7=>'samedi');
+    
+     
 
     }
 }
