@@ -8,11 +8,11 @@ header{
     
 }
 body{
-    background-color: yellow;
+    background-color: greenyellow;
 }
 h1{
     text-align: center;
-    color: yellow;
+    color: black;
 }
 h2{
     text-align: center;
@@ -34,7 +34,7 @@ a{
     text-decoration: none;
 }
 main{
-    height: 600px;
+    height: 110%;
     background-color: yellow;
 
 }
@@ -84,4 +84,16 @@ footer{
 }
 .resa{
     color: white;
+}
+.calendar{
+    width: 100%;
+    height: calc(100vh - 137px);
+}
+.calendar td{
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 14.29%;
+}
+.calendar__exception--semaines{
+   height: 100%; 
 }
