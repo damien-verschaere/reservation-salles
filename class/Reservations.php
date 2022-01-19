@@ -56,19 +56,12 @@ public function reservation($titre,$description,$debut,$fin,$id){
         }
 }
 
-public function affichage_resa(){
-
-    $affichage=$this->connexion()->prepare('SELECT * FROM reservations ');
-    $affichage->execute();
-    foreach ($affichage as $key ) {
-     echo "jour de la semaine " .date('w',strtotime($key['debut']))."<br>";
-     echo $key['fin']."<br>";
-     echo "nous somme le jour ".date('d/m/y \à\ H:m:s ',strtotime($key['debut']));
-    $jour_semaine=array(0=>'dimanche',1=>'lundi',2=>'mardi',3=>'mercredi',4=>'jeudi',6=>'vendredi',7=>'samedi');
-    
-     
-
-    }
+public function afficheResa(DateTime $debut,DateTime $fin) : array{
+    $afficheresa=$this->connexion()->prepare("SELECT * FROM reservations WHERE debut BETWEEN '{$debut->format('Y-m-d 00:00:00')}'AND '{$fin->format('Y-m-d 23:59:59')}'");
+    var_dump($afficheresa);
+    $afficheresa->execute();
+    $result=$afficheresa->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
 }
 
 }

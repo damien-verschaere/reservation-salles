@@ -6,7 +6,7 @@ class Calendrier{
     private $months = ['janvier','fevrier','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'];
     public $_month;
     public $_year;
-
+    
 
 /**
  * constructeur calendrier
@@ -49,7 +49,7 @@ public function getSemaines() {
 public function inMois($date){
     return $this->getPremierjour()->format('Y-m') === $date->format('Y-m');
 }
-public function nextMois(){
+public function nextMois() : Calendrier{
     $month=$this->_month + 1;
     $year=$this->_year;
     if ($month >12) {
@@ -58,7 +58,7 @@ public function nextMois(){
     }
     return new Calendrier($month,$year);
 }
-public function previousMois(){
+public function previousMois() : Calendrier{
     $month=$this->_month - 1;
     $year=$this->_year;
     if ($month <1) {
