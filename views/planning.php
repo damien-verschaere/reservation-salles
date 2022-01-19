@@ -6,13 +6,13 @@ session_start();
 require_once "../class/Reservations.php";
 require_once "../class/Calendrier.php";
 $resa=new Reservation;
-$calendrier=new Calendrier(1,2022);
+$calendrier=new Calendrier($_GET['month'] ,$_GET['year'] );
 $jour= $calendrier->getPremierjour()->modify('last monday');
 
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,22 +23,30 @@ $jour= $calendrier->getPremierjour()->modify('last monday');
 <body>
 <?php require "requires/header2.php";  ?>
 
-<main>
+    <main>
+        <div>
+            <h1><?= $calendrier->toString()?> </h1>
+            <a href="plannning.php?month=<?= $calendrier->previousMois()->_month;?>&year=<?= $calendrier->previousMois()->_year; ?>">&lt;</a>
+            <a href="plannning.php?month=<?= $calendrier->nextMois()->_month;?>&year=<?= $calendrier->nextMois()->_year; ?>">&gt;</a>
+        </div>
+        <table class="calendar calendar__exception<?= $calendrier->getSemaines();?>semaines">
+        <?php for ($i=0; $i <$calendrier->getSemaines() ; $i++) : ?>
+            <tr>
+                <?php foreach ($calendrier->days as $dateJour=> $day) : 
+                $date= (clone $jour)->modify("+" .($dateJour + $i * 7) ." days")
+                ?>
+        
+                <td>
+                    <?php if ($i === 0) : ?>
+                    <div class="joursemaine"> <?= $day;?></div>
+                    <?php endif ?>
+                    <?=$date ->format('d')?>
+                </td>
+                <?php endforeach;?> 
+            </tr>
     
-<h1><?= $calendrier->toString()?> </h1>
-<table class="calendar calendar__exception<?= $calendrier->getSemaines();?>semaines">
-    <?php for ($i=0; $i <$calendrier->getSemaines() ; $i++) : ?>
-    <tr>
-        <?php foreach ($calendrier->days as $dateJour=> $day) : ?>
-        <td>
-            <?= $day;?>
-            <?= (clone $jour)->modify("+" .($dateJour + $i * 7) ." days")->format('d')?>
-        </td>
-        <?php endforeach;?> 
-    </tr>
-    
-    <?php endfor;?>
-</table>
+            <?php endfor;?>
+        </table>
 </main>
 
 <?php

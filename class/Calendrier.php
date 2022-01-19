@@ -4,8 +4,8 @@ class Calendrier{
 
     public  $days=['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
     private $months = ['janvier','fevrier','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'];
-    private $_month;
-    private $_year;
+    public $_month;
+    public $_year;
 
 
 /**
@@ -46,7 +46,27 @@ public function getSemaines() {
     }
     return $semaines;
 }
-
+public function inMois($date){
+    return $this->getPremierjour()->format('Y-m') === $date->format('Y-m');
+}
+public function nextMois(){
+    $month=$this->_month + 1;
+    $year=$this->_year;
+    if ($month >12) {
+        $month=1;
+        $year +=1;
+    }
+    return new Calendrier($month,$year);
+}
+public function previousMois(){
+    $month=$this->_month - 1;
+    $year=$this->_year;
+    if ($month <1) {
+        $month=12;
+        $year -=1;
+    }
+    return new Calendrier($month,$year);
+}
 
 
 
