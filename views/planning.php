@@ -9,10 +9,9 @@ $resa=new Reservation;
 $calendrier=new Calendrier($_GET['month'] ,$_GET['year'] );
 $jour=$calendrier->getPremierjour();
 $semaines=$calendrier->getSemaines();
-$jours= $jour->format('N') === 1 ? : $calendrier->getPremierjour()->modify('last monday');
-$fin= (clone $jour ) ->modify('+' .(6 + 7 * $semaines - 1 ) . 'days' ) ;
-var_dump($fin);
-$resa->afficheResa($jour,$fin);
+$jour= $jour->format('N') === '1' ? $jour : $calendrier->getPremierjour()->modify('last monday');
+$fin= (clone $jour ) ->modify('+' .(6 + 7 * ($semaines - 1) ) . 'days' ) ;
+$afficheresa=$resa->afficheResaJour($jour,$fin);
 
 
 ?>
@@ -29,24 +28,30 @@ $resa->afficheResa($jour,$fin);
 <?php require "requires/header2.php";  ?>
 
     <main>
-   <?php $resa->afficheResa($jour,$fin)  ?>;
+        
         <div>
             <a href="planning.php?month=<?= $calendrier->previousMois()->_month;?>&year=<?= $calendrier->previousMois()->_year; ?>">&lt;</a>
             <h1><?= $calendrier->toString()?> </h1>
             <a href="planning.php?month=<?= $calendrier->nextMois()->_month;?>&year=<?= $calendrier->nextMois()->_year; ?>">&gt;</a>
         </div>
-        <table class="calendar calendar__exception<?= $calendrier->getSemaines();?>semaines">
+        <table class="calendar calendar__exception<?= $semaines;?>semaines">
         <?php for ($i=0; $i <$semaines ; $i++) : ?>
             <tr>
                 <?php foreach ($calendrier->days as $dateJour=> $day) : 
-                $date= (clone $jour)->modify("+" .($dateJour + $i * 7) ." days")
+                $date= (clone $jour)->modify("+" .($dateJour + $i * 7) ." days");
+                $resajour = $afficheresa[$date->format('Y-m-d')] ?? [];
                 ?>
         
                 <td>
                     <?php if ($i === 0) : ?>
-                    <div class="joursemaine"> <?= $day;?></div>
+                        <div class="joursemaine"> <?= $day;?></div>
                     <?php endif ?>
                     <?=$date ->format('d')?>
+                    <?php foreach ($resajour as $resajour) :?>
+                        <div>
+                            <?= (new DateTime($resajour['debut'])) ->format('H:i')?> - <a href="resa.php?id=?<?= $resajour['id']?>"><?= $resajour['titre']?></a>
+                        </div>
+                    <?php endforeach ;?>
                 </td>
                 <?php endforeach;?> 
             </tr>

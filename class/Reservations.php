@@ -31,6 +31,7 @@ public function connexion(){
     die();
     }
 }
+
 public function reservation($titre,$description,$debut,$fin,$id){
 
         if (isset($_POST['reservation'])) {
@@ -56,14 +57,36 @@ public function reservation($titre,$description,$debut,$fin,$id){
         }
 }
 
-public function afficheResa(DateTime $debut,DateTime $fin) : array{
-    $afficheresa=$this->connexion()->prepare("SELECT * FROM reservations WHERE debut BETWEEN '{$debut->format('Y-m-d 00:00:00')}'AND '{$fin->format('Y-m-d 23:59:59')}'");
-    var_dump($afficheresa);
-    $afficheresa->execute();
-    $result=$afficheresa->fetchAll(PDO::FETCH_ASSOC);
+
+public function afficheResa($debut,$fin) : array {
+    $pdo=$this->connexion();
+    $sql="SELECT * FROM reservations WHERE debut BETWEEN '{$debut->format('Y-m-d 00:00:00')}'AND '{$fin->format('Y-m-d 23:59:59')}'";
+    var_dump($sql);
+    $statement=$pdo->query($sql);
+    $result= $statement->fetchAll();
     return $result;
 }
+public function afficheResaJour($debut,$fin) : array {
+    $resasjour= $this->afficheResa($debut,$fin);
+    $days=[];
+    foreach ($resasjour as $resasjour) {
+        $date = explode(' ',$resasjour['debut'])[0];
+        if (!isset($days[$date])){
+            $days[$date] = [$resasjour];
+        }
+        else{
+            $days[$date][]=$resasjour;
+        }
 
+    }
+    return $days;
+}
+
+
+public function getId($id) {
+    $pdo=$this->connexion();
+    return  $pdo->query("SELECT * FROM reservations WHERE id= $id")->fetch();
+ }
 }
 
 
