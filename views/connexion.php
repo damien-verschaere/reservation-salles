@@ -20,16 +20,12 @@ if (isset($_POST['connexion'])) {
 <body>
 <?php require "requires/header2.php";  ?>
 
-<main>
+<main class="form">
     <h2>CONNECTEZ VOUS</h2>
     <div class=carre >
     <form action="connexion.php" method="post">
-        <label for="login">
-           login <input type="text" name="login" placeholder="login">
-        </label>
-        <label for="password">
-           password <input type="password" name="password" placeholder="password">
-        </label>
+        <input type="text" name="login" placeholder="login">
+        <input type="password" name="password" placeholder="password">
         <input type="submit" name="connexion" value="CONNEXION">
     </form>
     </div>

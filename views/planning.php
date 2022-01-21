@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-// var_dump($_SESSION['user']['id']);
+
 
 require_once "../class/Reservations.php";
 require_once "../class/Calendrier.php";
@@ -49,7 +49,7 @@ $afficheresa=$resa->afficheResaJour($jour,$fin);
                     <?=$date ->format('d')?>
                     <?php foreach ($resajour as $resajour) :?>
                         <div>
-                            <?= (new DateTime($resajour['debut'])) ->format('H:i')?> - <a href="resa.php?id=?<?= $resajour['id']?>"><?= $resajour['titre']?></a>
+                            <?= (new DateTime($resajour['debut'])) ->format('H:i')?> - <a href="resa.php?id=<?= $resajour['id']?>"><?= $resajour['titre']?></a>
                         </div>
                     <?php endforeach ;?>
                 </td>

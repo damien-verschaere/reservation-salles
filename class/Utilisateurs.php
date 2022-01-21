@@ -32,6 +32,16 @@ function register($login,$password){
         elseif ($password != $_POST['Vpass']) {
             echo "les MDP ne correspondent pas !";
         }
+        elseif (!empty($login)) {
+            $veriflogin=$this->connexion()->prepare("SELECT login FROM utilisateurs WHERE login=?");
+            $veriflogin->bindValue(1,$login,PDO::PARAM_STR);
+            $veriflogin->execute();
+            $result= $veriflogin->fetch();
+            if ($result) {
+                echo "le login existe deja !!";
+            }
+        }
+        
         else {
             $log=htmlspecialchars($login);
             $hash=htmlspecialchars(password_hash($password,PASSWORD_DEFAULT));
@@ -39,17 +49,20 @@ function register($login,$password){
             $statement->bindParam(':login',$log ,PDO::PARAM_STR);
             $statement->bindParam(':password',$hash,PDO::PARAM_STR);
             $statement->execute();  
+            header('Location: connexion.php');
         }
-        header('Location: connexion.php');
-        exit;
+        
+       
     }
     
 } 
 function connexion_user($login,$password){
+    $log=htmlspecialchars($login);
     $connexion_user=$this->connexion()->prepare("SELECT * FROM utilisateurs WHERE login=:login");
-    $connexion_user->bindValue(':login',$login,PDO::PARAM_STR);
+    $connexion_user->bindValue(':login',$log,PDO::PARAM_STR);
     $connexion_user->execute();
     $user=$connexion_user->fetch(PDO::FETCH_ASSOC);
+    
     if (!empty($user)) {
         if(password_verify($password,$user['password']) == $user['password']) {
             $this->_id=$user['id'];
@@ -76,9 +89,9 @@ function connexion_user($login,$password){
 
 function modifier_profil($login,$password){
     if (isset($_POST['update'])) {
-        $id=$_SESSION['user']['id'];
+       $id=$_SESSION['user']['id'];
         if (empty($login) ) {
-            echo "veuillez remplir tout le champ Login !";
+            echo "veuillez remplir le champ Login !";
         }
         elseif (empty($password)) {
             $log=htmlspecialchars($login);
@@ -86,6 +99,15 @@ function modifier_profil($login,$password){
             $update_user->bindValue(':login',$log,PDO::PARAM_STR);
             $update_user->execute();
             if ($update_user->execute()) {
+                $newlog=$this->connexion()->prepare("SELECT * FROM utilisateurs WHERE id=$id");
+                $newlog->execute();
+                $user=$newlog->fetchAll(PDO::FETCH_ASSOC);
+                var_dump($user);
+                if (isset($user)) {
+                    $_SESSION['user']=$user;
+                    var_dump( $_SESSION ['user'['login']]);
+                    echo "update ok2";
+                }
                 echo "update ok1";
             }
             else {
@@ -106,7 +128,7 @@ function modifier_profil($login,$password){
             $user=$newlog->fetchAll(PDO::FETCH_ASSOC);
             var_dump($user);
             if (isset($user)) {
-                $_SESSION=$user;
+                $_SESSION['user']=$user;
                 var_dump( $_SESSION ['user'['login']]);
                 echo "update ok2";
             }

@@ -1,21 +1,16 @@
 <?php 
 
-
-require "requires/header2.php";
 require_once "../class/Utilisateurs.php";
-
 if (isset($_POST["sub"])){
     $user = new Utilisateur();
-    $user->register($_POST['login'],$_POST['password']); 
-     
+    $user->register($_POST['login'],$_POST['password']);   
 }
-
-
+require "requires/header2.php";
 ?>
 
-<main>
+<main class="form">
     <h2>INSCRIVEZ VOUS</h2>
-    <div class=carre >
+    <div class="carre">
     <form action="inscription.php" method="post">
         <input type="text" name="login" placeholder="login">
         <input type="password" name="password" placeholder="password">

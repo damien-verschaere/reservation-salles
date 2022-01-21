@@ -8,8 +8,8 @@ $resaparid = new Reservation;
 if (!isset($_GET['id'])) {
     header('location : ../index.php');
 }
-$resajournee= $resaparid->getId(intval($_GET['id']) );
-var_dump($resaparid->getId(intval($_GET['id']) ))
+$resajournee= $resaparid->getId($_GET['id']);
+var_dump($resaparid->getId($_GET['id']))
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -24,7 +24,10 @@ var_dump($resaparid->getId(intval($_GET['id']) ))
 <?php require "requires/header2.php";  ?>
 
     <main>
-      <h1><?= var_dump($resajournee['id']) ?></h1>  
+      <h1><?= $resajournee['titre']?></h1>
+      <p><?= $resajournee['description']?></p>  
+      <p><?= $resajournee['debut']?></p>
+      <p><?= $resajournee['fin']?></p>
        
     </main>
 
