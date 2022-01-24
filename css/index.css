@@ -15,7 +15,7 @@ a{
      font-family: sans-serif;;
 }
 body,main{
-    height: 43.75em;
+    height: auto;
     background-color: rgb(144, 238, 144);
 }
 nav ul{
@@ -42,12 +42,12 @@ footer{
     display: flex;
     align-items: center;
     flex-direction: column;
-    height:31.25em ;  
+    
 }
 .accueil img{
     height: 31.25em;
     width: 43.75em;
-    border-radius: 3.125em;
+    border: 5px solid goldenrod;
 }
 .accueil h2,.presse h2,.form h2{
     color:rgb(85, 107, 47);
@@ -64,11 +64,12 @@ footer{
     text-align: center;
     word-spacing: 2px;
     font-size: 25px;
+    margin-bottom: 2%;
 }
 .presse{
-    height:10em;
+    
     background-color:rgb(85, 107, 47); 
-    margin-top: 3%;
+    
     margin-left: 20%;
     margin-right: 20%;
     display: flex;
@@ -79,10 +80,12 @@ footer{
     font-family:  'Segoe UI','Open Sans', 'Helvetica Neue', sans-serif;
     margin-bottom: 3%;
     color:rgb(255, 250, 240);
-    border-radius:3.100em;
+    border: 5px solid goldenrod;
+   
     
 }
 .presse p {
+    margin-bottom: 3%;
     margin-left: 3%;
     margin-right: 3%;
 }
@@ -105,6 +108,7 @@ p{
     width: 33.75em;
     border-radius: 3.125em;
     align-items: center;
+    margin-bottom: 5%;
 }
 form{
     display: flex;
@@ -112,12 +116,13 @@ form{
 }
 form input,form textarea{
     width: 25em;
-    border-radius: 30px;
+   
     margin-top: 3%;
 }
 
 
 /* -------------------------------------------------------------------------------------------------------------------------------------------- */
+
 .resa{
     color: black;
 }
@@ -125,19 +130,57 @@ form input,form textarea{
     margin: auto;
     width: 70%;
     height: 50%;
+    margin-bottom: 10%;
 }
 .calendar td{
     padding: 10px;
-    border: 3px solid black;
+    border: 3px solid rgb(85, 107, 47);
     width: 14.29%;
+    height: 7em;
 }
 .calendar td:hover{
-   display: flex;
-   justify-content: center;
-   
-    /* transform: scale(10.5); */
-    
+  
+  background-color:  goldenrod;  
+}
+.calendar td a{
+    color:black;
 }
 .calendar__exception--semaines{
    height: 16.66%; 
+}
+.planning{
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 3%;
+
+}
+.planning h1{
+    color:rgb(85, 107, 47);
+}
+.planning a{
+   margin-top: 1%;
+   color: goldenrod;
+}
+/* ---------------------------------------------------affichage reservation ------------------------------------------------------------------------------ */
+.afficheresa{
+    display: flex;
+    justify-content: center;
+}
+.afficheresa h2,.afficheresa p{
+    color:rgb(144, 238, 144);
+}
+
+.carre2{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(85, 107, 47);;
+    height: 25.25em;
+    width: 33.75em;
+    border-radius: 3.125em;
+    align-items: center;
+    margin-bottom: 5%;
+    flex-direction: column;
+    margin-top: 5%;
+    border: 5px solid goldenrod;
 }

@@ -19,3 +19,4 @@ require "requires/header2.php";
     </form>
     </div>
 </main>
+<?php require "requires/footer.php"?>

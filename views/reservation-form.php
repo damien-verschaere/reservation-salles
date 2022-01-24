@@ -1,10 +1,11 @@
 <?php
 session_start();
-var_dump($_SESSION['user']['id']);
+
 require "requires/header2.php";
 require_once "../class/Reservations.php";
 ?>
 <main class="form">
+    <h2>Reservez votre momment detente</h2>
     <div class="carre">
     <form action="reservation-form.php" method="post">
         <input type="text" name="titre" placeholder="TITRE">

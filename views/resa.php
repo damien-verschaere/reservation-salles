@@ -9,7 +9,7 @@ if (!isset($_GET['id'])) {
     header('location : ../index.php');
 }
 $resajournee= $resaparid->getId($_GET['id']);
-var_dump($resaparid->getId($_GET['id']))
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -23,12 +23,13 @@ var_dump($resaparid->getId($_GET['id']))
 <body>
 <?php require "requires/header2.php";  ?>
 
-    <main>
-      <h1><?= $resajournee['titre']?></h1>
-      <p><?= $resajournee['description']?></p>  
-      <p><?= $resajournee['debut']?></p>
-      <p><?= $resajournee['fin']?></p>
-       
+    <main class="afficheresa">  
+      <div class="carre2">  
+        <h2><?= $resajournee['titre']?></h2>
+        <p><?= $resajournee['description']?></p>  
+        <p><?= $resajournee['debut']?></p>
+        <p><?= $resajournee['fin']?></p>
+      </div>
     </main>
 
 <?php

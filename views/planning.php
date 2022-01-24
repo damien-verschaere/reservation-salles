@@ -6,7 +6,8 @@ session_start();
 require_once "../class/Reservations.php";
 require_once "../class/Calendrier.php";
 $resa=new Reservation;
-$calendrier=new Calendrier($_GET['month'] ,$_GET['year'] );
+@$calendrier=new Calendrier($_GET['month'] ,$_GET['year'] );
+
 $jour=$calendrier->getPremierjour();
 $semaines=$calendrier->getSemaines();
 $jour= $jour->format('N') === '1' ? $jour : $calendrier->getPremierjour()->modify('last monday');
@@ -17,12 +18,12 @@ require "requires/header2.php";
 
 
 
-    <main>
+    <main >
         
-        <div>
-            <a href="planning.php?month=<?= $calendrier->previousMois()->_month;?>&year=<?= $calendrier->previousMois()->_year; ?>">&lt;</a>
+        <div class="planning">
+            <a href="planning.php?month=<?= $calendrier->previousMois()->_month;?>&year=<?= $calendrier->previousMois()->_year; ?>">precedent</a>
             <h1><?= $calendrier->toString()?> </h1>
-            <a href="planning.php?month=<?= $calendrier->nextMois()->_month;?>&year=<?= $calendrier->nextMois()->_year; ?>">&gt;</a>
+            <a href="planning.php?month=<?= $calendrier->nextMois()->_month;?>&year=<?= $calendrier->nextMois()->_year; ?>">suivant</a>
         </div>
         <table class="calendar calendar__exception<?= $semaines;?>semaines">
         <?php for ($i=0; $i <$semaines ; $i++) : ?>

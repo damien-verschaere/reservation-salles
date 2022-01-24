@@ -35,27 +35,26 @@ public function connexion(){
 public function reservation($titre,$description,$debut,$fin,$id){
     
         if (isset($_POST['reservation'])) {
+           $day=$_POST['date'];
             if (empty($titre) || empty($description)|| empty($debut)||empty($fin)) {
                 echo "veuillez remplir tous les champs !!";
             }
             elseif ($_POST['date']<date("Y-m-d H:i:s")) {
             echo "veuillez choisir une date possible !!";
             }
-            // elseif(!empty($debut)){
-            //     $verif_resa=$this->connexion()->prepare("SELECT debut FROM reservations ");
+            elseif(!empty($debut)){
+                $verif_resa=$this->connexion()->prepare("SELECT * FROM reservations WHERE debut= '$day'");
                 
-            //     $verif_resa->execute();
-            //     $result=$verif_resa->fetch();
-            //     var_dump($result);
-            //     $dateheure = date('H:i:s',intval($result['debut']));
-            //     var_dump($dateheure);
-            //     if ($result['debut']  == $debut) {
-            //         echo "le crenau horraire choisis est deja reserve";
-            //     }
-            // }
+                $verif_resa->execute();
+                $result=$verif_resa->fetch();
+                
+                if ($result) {
+                    echo "Le crenaux est deja reservé! ";
+                } 
+            
         
         
-            else {
+                else {
                 
                 $title=htmlspecialchars(trim($titre));
                 $describe=htmlspecialchars(trim($description));
@@ -77,12 +76,13 @@ public function reservation($titre,$description,$debut,$fin,$id){
         }
         
 }
+}
 
 
 public function afficheResa($debut,$fin) : array {
     $pdo=$this->connexion();
-    $sql="SELECT * FROM reservations WHERE debut BETWEEN '{$debut->format('Y-m-d 00:00:00')}'AND '{$fin->format('Y-m-d 23:59:59')}'";
-    var_dump($sql);
+    $sql="SELECT * FROM reservations WHERE debut BETWEEN '{$debut->format('Y-m-d 00:00:00')}'AND '{$fin->format('Y-m-d 23:59:59')}' ORDER BY debut ASC  ";
+  
     $statement=$pdo->query($sql);
     $result= $statement->fetchAll();
     return $result;
