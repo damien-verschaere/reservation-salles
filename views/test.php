@@ -4,7 +4,7 @@ session_start();
 
 
 require_once "../class/Reservations.php";
-require_once "../class/Calendrier.php";
+require_once "../class/testcal.php";
 $resa=new Reservation;
 $calendrier=new Calendrier($_GET['month'] ,$_GET['year'] );
 $jour=$calendrier->getPremierjour();
@@ -14,10 +14,7 @@ $fin= (clone $jour ) ->modify('+' .(6 + 7 * ($semaines - 1) ) . 'days' ) ;
 $afficheresa=$resa->afficheResaJour($jour,$fin);
 require "requires/header2.php";
 ?>
-
-
-
-    <main>
+ <main>
         
         <div>
             <a href="planning.php?month=<?= $calendrier->previousMois()->_month;?>&year=<?= $calendrier->previousMois()->_year; ?>">&lt;</a>
@@ -49,6 +46,17 @@ require "requires/header2.php";
             <?php endfor;?>
         </table>
 </main>
+
+
+
+
+
+
+
+
+
+
+
 
 <?php
 require "requires/footer2.php";

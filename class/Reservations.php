@@ -41,18 +41,18 @@ public function reservation($titre,$description,$debut,$fin,$id){
             elseif ($_POST['date']<date("Y-m-d H:i:s")) {
             echo "veuillez choisir une date possible !!";
             }
-            elseif(!empty($debut)){
-                $verif_resa=$this->connexion()->prepare("SELECT debut FROM reservations ");
+            // elseif(!empty($debut)){
+            //     $verif_resa=$this->connexion()->prepare("SELECT debut FROM reservations ");
                 
-                $verif_resa->execute();
-                $result=$verif_resa->fetch();
-                var_dump($result);
-                $dateheure = date('H:i:s',intval($result['debut']));
-                var_dump($dateheure);
-                if ($result['debut']  == $debut) {
-                    echo "le crenau horraire choisis est deja reserve";
-                }
-            }
+            //     $verif_resa->execute();
+            //     $result=$verif_resa->fetch();
+            //     var_dump($result);
+            //     $dateheure = date('H:i:s',intval($result['debut']));
+            //     var_dump($dateheure);
+            //     if ($result['debut']  == $debut) {
+            //         echo "le crenau horraire choisis est deja reserve";
+            //     }
+            // }
         
         
             else {

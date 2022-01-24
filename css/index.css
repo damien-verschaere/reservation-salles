@@ -119,16 +119,24 @@ form input,form textarea{
 
 /* -------------------------------------------------------------------------------------------------------------------------------------------- */
 .resa{
-    color: white;
+    color: black;
 }
 .calendar{
-    width: 100%;
-    height: calc(100vh - 137px);
+    margin: auto;
+    width: 70%;
+    height: 50%;
 }
 .calendar td{
     padding: 10px;
     border: 3px solid black;
     width: 14.29%;
+}
+.calendar td:hover{
+   display: flex;
+   justify-content: center;
+   
+    /* transform: scale(10.5); */
+    
 }
 .calendar__exception--semaines{
    height: 16.66%; 
