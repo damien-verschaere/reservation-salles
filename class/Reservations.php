@@ -82,7 +82,6 @@ public function reservation($titre,$description,$debut,$fin,$id){
 public function afficheResa($debut,$fin) : array {
     $pdo=$this->connexion();
     $sql="SELECT * FROM reservations WHERE debut BETWEEN '{$debut->format('Y-m-d 00:00:00')}'AND '{$fin->format('Y-m-d 23:59:59')}' ORDER BY debut ASC  ";
-  
     $statement=$pdo->query($sql);
     $result= $statement->fetchAll();
     return $result;
@@ -111,6 +110,9 @@ public function getId() {
     $getid->bindValue(1,$_GET['id']);
     $getid->execute();
     $result=$getid->fetch();
+    if (empty($result)) {
+        header('location: ../views/404.php');
+    }
     return $result;
     // $pdo=$this->connexion();
     // return  $pdo->query("SELECT * FROM reservations WHERE id= $id")->fetch();

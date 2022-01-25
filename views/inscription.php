@@ -1,10 +1,7 @@
 <?php 
 
 require_once "../class/Utilisateurs.php";
-if (isset($_POST["sub"])){
-    $user = new Utilisateur();
-    $user->register($_POST['login'],$_POST['password']);   
-}
+
 require "requires/header2.php";
 ?>
 
@@ -16,6 +13,10 @@ require "requires/header2.php";
         <input type="password" name="password" placeholder="password">
         <input type="password" name="Vpass" placeholder="verification de password">
         <input type="submit" name="sub">
+        <?php if (isset($_POST["sub"])){
+            $user = new Utilisateur();
+            $user->register($_POST['login'],$_POST['password']);   
+        }?>
     </form>
     </div>
 </main>

@@ -2,11 +2,7 @@
 
 session_start();
 require_once "../class/Utilisateurs.php";
-if (isset($_POST['connexion'])) {
-    $utilisateur=new Utilisateur();
-    $utilisateur->connexion_user($_POST['login'],$_POST['password']);
-    
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -27,6 +23,11 @@ if (isset($_POST['connexion'])) {
         <input type="text" name="login" placeholder="login">
         <input type="password" name="password" placeholder="password">
         <input type="submit" name="connexion" value="CONNEXION">
+        <?php if (isset($_POST['connexion'])) {
+            $utilisateur=new Utilisateur();
+            $utilisateur->connexion_user($_POST['login'],$_POST['password']);
+    
+        }?>
     </form>
     </div>
 </main>

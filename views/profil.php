@@ -2,10 +2,7 @@
 
 session_start();
 require_once "../class/Utilisateurs.php";
-if (isset($_POST['update'])) {
-    $user=new Utilisateur;
-    $user->modifier_profil($_POST['login'],$_POST['password']);
-}
+
 
 require "requires/header2.php";
 
@@ -18,10 +15,14 @@ require "requires/header2.php";
     <input type="text" name="login" placeholder="LOGIN">
     <input type="password" name="password" placeholder="PASSWORD">
     <input type="submit" value="MODIFIER" name="update">
-    </div>
-
+    
+    <?php if (isset($_POST['update'])) {
+    $user=new Utilisateur;
+    $user->modifier_profil($_POST['login'],$_POST['password']);
+}?>
 
     </form>
+    </div>
 </main>
 <?php
     require "requires/footer2.php"

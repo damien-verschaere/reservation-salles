@@ -104,11 +104,10 @@ function modifier_profil($login,$password){
                 $user=$newlog->fetchAll(PDO::FETCH_ASSOC);
                 var_dump($user);
                 if (isset($user)) {
-                    $_SESSION['user']=$user;
-                    var_dump( $_SESSION ['user'['login']]);
+                    $_SESSION['user']=$user[0];
+                    var_dump( $_SESSION);
                     echo "update ok2";
-                }
-                echo "update ok1";
+                } 
             }
             else {
                 echo "update fail ";
@@ -129,7 +128,7 @@ function modifier_profil($login,$password){
             var_dump($user);
             if (isset($user)) {
                 $_SESSION['user']=$user;
-                var_dump( $_SESSION ['user'['login']]);
+                var_dump( $_SESSION ['user']['login']);
                 echo "update ok2";
             }
         
@@ -144,7 +143,12 @@ function modifier_profil($login,$password){
 
 }
 }
-
+public function deconnexion(){
+    session_start();
+    session_unset();
+    session_destroy();
+    header('location: ../index.php');
+}
 }
 
 

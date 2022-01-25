@@ -40,7 +40,7 @@ require "requires/header2.php";
                     <?=$date ->format('d')?>
                     <?php foreach ($resajour as $resajour) :?>
                         <div>
-                            <?= (new DateTime($resajour['debut'])) ->format('H:i')?> - <a href="resa.php?id=<?= $resajour['id']?>"><?= $resajour['titre']?></a>
+                            <?= (new DateTime($resajour['debut'])) ->format('H:i')?> - <a href="reservation.php?id=<?= $resajour['id']?>"><?= $resajour['titre']?></a>
                         </div>
                     <?php endforeach ;?>
                 </td>

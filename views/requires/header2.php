@@ -20,6 +20,7 @@
           <a href="reservation-form.php"><li>Reservation</li></a>
          <a href="profil.php"><li>profil</li></a> 
          <a href="planning.php"><li>planning</li></a> 
+         <a href="deconnexion.php"><li>deconnexion</li></a>
           
           
          <?php endif; ?>

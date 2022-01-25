@@ -21,6 +21,7 @@
           <a href="views/reservation-form.php"><li>Reservation</li></a>
          <a href="views/profil.php"><li>profil</li></a> 
          <a href="views/planning.php"><li>planning</li></a> 
+         <a href="views/deconnexion.php"><li>deconnexion</li></a>
           
           
          <?php endif; ?>
