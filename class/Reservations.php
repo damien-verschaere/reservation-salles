@@ -36,13 +36,23 @@ public function reservation($titre,$description,$debut,$fin,$id){
     
         if (isset($_POST['reservation'])) {
            $day=$_POST['date'];
+          $heure= explode(';',explode('T',$day)[1])[0];
+
+
             if (empty($titre) || empty($description)|| empty($debut)||empty($fin)) {
                 echo "veuillez remplir tous les champs !!";
             }
-            elseif ($_POST['date']<date("Y-m-d H:i:s")) {
+            elseif ($_POST['date']<date("Y-m-d")) {
             echo "veuillez choisir une date possible !!";
             }
+            elseif ($heure < date('08:00')||$heure > date('18:00')) {
+                echo "veuillez reserver  entre 08h00 et 18h00";
+             
+            }
+       
             elseif(!empty($debut)){
+
+                
                 $verif_resa=$this->connexion()->prepare("SELECT * FROM reservations WHERE debut= '$day'");
                 
                 $verif_resa->execute();
@@ -51,7 +61,6 @@ public function reservation($titre,$description,$debut,$fin,$id){
                 if ($result) {
                     echo "Le crenaux est deja reservé! ";
                 } 
-            
         
         
                 else {

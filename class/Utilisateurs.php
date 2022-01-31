@@ -40,19 +40,22 @@ function register($login,$password){
             if ($result) {
                 echo "le login existe deja !!";
             }
+        
+        
+            else {
+                $log=htmlspecialchars($login);
+                $hash=htmlspecialchars(password_hash($password,PASSWORD_DEFAULT));
+                $statement= $this->connexion() -> prepare('INSERT INTO utilisateurs (login,password) VALUES ( :login,:password)');
+                $statement->bindParam(':login',$log ,PDO::PARAM_STR);
+                $statement->bindParam(':password',$hash,PDO::PARAM_STR);
+                $statement->execute();  
+                header('location: connexion.php');
+                echo "merde ça marche pas !!!!";
+
+            }
         }
         
-        else {
-            $log=htmlspecialchars($login);
-            $hash=htmlspecialchars(password_hash($password,PASSWORD_DEFAULT));
-            $statement= $this->connexion() -> prepare('INSERT INTO utilisateurs (login,password) VALUES ( :login,:password)');
-            $statement->bindParam(':login',$log ,PDO::PARAM_STR);
-            $statement->bindParam(':password',$hash,PDO::PARAM_STR);
-            $statement->execute();  
-            header('Location: connexion.php');
-        }
-        
-       
+
     }
     
 } 
